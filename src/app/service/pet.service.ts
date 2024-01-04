@@ -8,13 +8,13 @@ import {Pet} from "../model/Pet";
   providedIn: 'root'
 })
 export class PetService {
-  private readonly url: string;
+  private readonly _url: string;
 
   constructor(private http: HttpClient) {
-    this.url = `${environment.backendUrl}/pets`;
+    this._url = `${environment.backendUrl}/pets`;
   }
 
   getPets(): Observable<Pet[]> {
-    return this.http.get<Pet[]>(this.url);
+    return this.http.get<Pet[]>(this._url);
   }
 }
