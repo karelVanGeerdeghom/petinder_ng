@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PetService } from "../service/pet.service";
 import { Pet } from "../model/Pet";
-import {CommonModule} from "@angular/common";
-import {map, Observable} from "rxjs";
-import {FormsModule} from "@angular/forms";
-import {NameFilterPipe} from "../pipes/name-filter.pipe";
+import { CommonModule } from "@angular/common";
+import { map, Observable } from "rxjs";
+import { FormsModule } from "@angular/forms";
+import { NameFilterPipe } from "../pipes/name-filter.pipe";
 
 @Component({
   selector: 'app-profile-gallery',
