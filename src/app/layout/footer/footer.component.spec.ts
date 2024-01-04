@@ -11,7 +11,7 @@ describe('FooterComponent', () => {
       imports: [FooterComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +19,9 @@ describe('FooterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have as year the current year', () => {
+    expect(component.year).toEqual(new Date().getFullYear());
   });
 });
