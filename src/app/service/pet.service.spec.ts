@@ -21,7 +21,6 @@ describe('PetService', () => {
   });
 
   afterEach(() => {
-    // Verify that none of the tests make any extra HTTP requests.
     TestBed.inject(HttpTestingController).verify();
   });
 
@@ -30,21 +29,23 @@ describe('PetService', () => {
   });
 
   it('should get pets', async () => {
-    // const httpTesting = TestBed.inject(HttpTestingController);
-    // const req = httpTesting.expectOne({
-    //   method: 'GET',
-    //   url: `${environment.backendUrl}/pets`,
-    // }, 'Request to get the pets');
-    //
-    // const petsResult: Pet[] = [
-    //   {id: 1, name: 'test 1', kind: 'cat', image: 'test_1.jpg', profileText: 'test', popularity: 1},
-    //   {id: 2, name: 'test 2', kind: 'dog', image: 'test_2.jpg', profileText: 'test', popularity: 2}
-    // ];
-    // req.flush(petsResult);
-    //
-    // const pets$ = service.getPets();
-    // const pets = firstValueFrom(pets$);
-    //
-    // expect(await pets).toEqual(petsResult);
+    const pets$ = service.getPets();
+    const petsPromise = firstValueFrom(pets$);
+
+    const httpTesting = TestBed.inject(HttpTestingController);
+    const req = httpTesting.expectOne({
+      method: 'GET',
+      url: `${environment.backendUrl}/pets`,
+    }, 'Request to get the pets');
+
+    const petsResult: Pet[] = [
+      {id: 1, name: 'test 1', kind: 'cat', image: 'test_1.jpg', profileText: 'test', popularity: 1},
+      {id: 2, name: 'test 2', kind: 'dog', image: 'test_2.jpg', profileText: 'test', popularity: 2}
+    ];
+    req.flush(petsResult);
+
+    expect(await petsPromise).toEqual(petsResult);
+
+    httpTesting.verify();
   });
 });
