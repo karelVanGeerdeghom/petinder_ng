@@ -2,27 +2,32 @@ import { Component } from '@angular/core';
 import { PetService } from "../service/pet.service";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Validators } from '@angular/forms';
-import { NgIf } from "@angular/common";
+import {NgForOf, NgIf, TitleCasePipe, UpperCasePipe} from "@angular/common";
 import {Router} from "@angular/router";
+import {Kind} from "../model/Pet";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    NgForOf,
+    TitleCasePipe,
+    UpperCasePipe
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  public kinds: string[] = Object.values(Kind);
+
   public profileForm = this.formBuilder.group({
     id: ['8', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(1)]],
     name: ['Kamiel', [Validators.required]],
-    kind: ['Dog', [Validators.required]],
+    kind: ['Cat', [Validators.required]],
     image: ['images/kamiel.jpg', [Validators.required]],
-    profileText: ['Woof!', [Validators.required]],
-    popularity: ['9', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(1), Validators.max(9)]],
+    profileText: ['Meow!', [Validators.required]],
   });
 
   constructor(private formBuilder: FormBuilder, private petService: PetService, private router: Router) {}
@@ -35,7 +40,6 @@ export class ProfileComponent {
         kind: this.profileForm.value.kind!,
         image: this.profileForm.value.image!,
         profileText: this.profileForm.value.profileText!,
-        popularity: parseInt(this.profileForm.value.popularity!),
       }
 
       this.petService.addPet(pet).subscribe();

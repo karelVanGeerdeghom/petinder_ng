@@ -7,7 +7,7 @@ export interface Pet {
   popularity: number,
 }
 
-enum Kind {
+export enum Kind {
   CAT = 'cat',
   DOG = 'dog',
   CHICKEN = 'chicken',
