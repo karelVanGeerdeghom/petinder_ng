@@ -17,7 +17,6 @@ export class PetService {
   }
 
   getPets(): Observable<Pet[]> {
-    console.log('PetService.getPets()');
     return this.http.get<Pet[]>(this._url);
   }
 
@@ -25,8 +24,8 @@ export class PetService {
     return this.http.post<Pet>(this._url, petDto);
   }
 
-  deletePet(pet: Pet): void {
-    this.http.delete(`${this._url}/${pet.id}`).subscribe();
+  deletePet(pet: Pet): Observable<any> {
+    return this.http.delete(`${this._url}/${pet.id}`);
   }
 
   sendWhatsAppMessage(whatsAppMessage: WhatsAppMessage): void {

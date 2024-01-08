@@ -6476,3 +6476,7 @@ body {
 .gallery-pet:hover, .gallery-pet.active {
   transform: scale(1.03, 1.03);
 }
+
+nav a {
+  cursor: pointer;
+}

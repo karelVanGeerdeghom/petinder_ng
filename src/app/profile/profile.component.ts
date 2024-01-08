@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Validators } from '@angular/forms';
 import { NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from "@angular/common";
 import { Kind } from "../model/Pet";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,7 @@ export class ProfileComponent {
     profileText: ['Meow!', [Validators.required]],
   });
 
-  constructor(private formBuilder: FormBuilder, private petService: PetService) {}
+  constructor(private formBuilder: FormBuilder, private petService: PetService, private router: Router) {}
 
   onSubmit() {
     if (this.profileForm.valid) {
@@ -42,7 +43,7 @@ export class ProfileComponent {
       }
 
       this.petService.addPet(pet).subscribe();
-      this.profileForm.reset();
+      this.router.navigateByUrl('');
     }
   }
 

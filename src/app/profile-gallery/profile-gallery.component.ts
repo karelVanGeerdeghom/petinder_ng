@@ -6,16 +6,17 @@ import { map, Observable } from "rxjs";
 import { FormsModule } from "@angular/forms";
 import { NameFilterPipe } from "../pipes/name-filter.pipe";
 import { PopularityPipe } from "../pipes/popularity.pipe";
+import {SortFilterPipe} from "../pipes/sort-filter.pipe";
 
 @Component({
   selector: 'app-profile-gallery',
   standalone: true,
-  imports: [CommonModule, FormsModule, NameFilterPipe, PopularityPipe],
+  imports: [CommonModule, FormsModule, NameFilterPipe, PopularityPipe, SortFilterPipe],
   templateUrl: './profile-gallery.component.html',
   styleUrl: './profile-gallery.component.css'
 })
 export class ProfileGalleryComponent implements OnInit {
-  public pets$!: Observable<Pet[]>;
+  public pets!: Pet[];
   public selectedPet: Pet | undefined;
   public searchText: string | undefined;
   public name: string | undefined;
@@ -27,10 +28,7 @@ export class ProfileGalleryComponent implements OnInit {
   }
 
   getPets(): void {
-    console.log('ProfileGalleryComponent.getPets()');
-    this.pets$ = this.petService.getPets().pipe(
-      map(pets => pets.sort((a, b) => a.name.localeCompare(b.name)))
-    );
+    this.petService.getPets().subscribe(pets => this.pets = pets);
   }
 
   selectPet(pet: Pet): void {
@@ -38,7 +36,10 @@ export class ProfileGalleryComponent implements OnInit {
   }
 
   deletePet(pet: Pet): void {
-    this.petService.deletePet(pet);
+    this.selectedPet = undefined;
+    this.petService.deletePet(pet).subscribe(any => {
+      this.getPets();
+    });
   }
 
   sendWhatsAppMessage(pet: Pet): void {
