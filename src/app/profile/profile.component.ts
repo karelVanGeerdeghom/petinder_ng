@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { PetService } from "../service/pet.service";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Validators } from '@angular/forms';
-import {NgForOf, NgIf, TitleCasePipe, UpperCasePipe} from "@angular/common";
-import {Router} from "@angular/router";
-import {Kind} from "../model/Pet";
+import { NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from "@angular/common";
+import { Kind } from "../model/Pet";
 
 @Component({
   selector: 'app-profile',
@@ -25,12 +24,12 @@ export class ProfileComponent {
   public profileForm = this.formBuilder.group({
     id: ['8', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(1)]],
     name: ['Kamiel', [Validators.required]],
-    kind: ['Cat', [Validators.required]],
+    kind: ['CAT', [Validators.required]],
     image: ['images/kamiel.jpg', [Validators.required]],
     profileText: ['Meow!', [Validators.required]],
   });
 
-  constructor(private formBuilder: FormBuilder, private petService: PetService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private petService: PetService) {}
 
   onSubmit() {
     if (this.profileForm.valid) {
