@@ -6476,7 +6476,3 @@ body {
 .gallery-pet:hover, .gallery-pet.active {
   transform: scale(1.03, 1.03);
 }
-
-.ng-invalid:not(form) {
-  border-left: 5px solid #a94442;
-}

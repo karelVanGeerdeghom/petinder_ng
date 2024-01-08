@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,24 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   private _title: string;
-  
-  constructor() {
+
+  constructor(private router: Router) {
     this._title = 'Petinder'
   }
 
   get title(): string {
     return this._title;
+  }
+
+  gallery() {
+    this.router.navigateByUrl('');
+  }
+
+  add() {
+    this.router.navigateByUrl('add');
+  }
+
+  login() {
+    this.router.navigateByUrl('login');
   }
 }
