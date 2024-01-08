@@ -10,29 +10,30 @@ import {PetDto} from "../model/PetDto";
   providedIn: 'root'
 })
 export class PetService {
-  private readonly url: string;
+  private readonly _url: string;
 
   constructor(private http: HttpClient) {
-    this.url = `${environment.backendUrl}/pets`;
+    this._url = `${environment.backendUrl}/pets`;
   }
 
   getPets(): Observable<Pet[]> {
-    return this.http.get<Pet[]>(this.url);
+    console.log('PetService.getPets()');
+    return this.http.get<Pet[]>(this._url);
   }
 
   addPet(petDto: PetDto): Observable<Pet> {
-    return this.http.post<Pet>(this.url, petDto);
+    return this.http.post<Pet>(this._url, petDto);
   }
 
   deletePet(pet: Pet): void {
-    this.http.delete(`${this.url}/${pet.id}`).subscribe();
+    this.http.delete(`${this._url}/${pet.id}`).subscribe();
   }
 
   sendWhatsAppMessage(whatsAppMessage: WhatsAppMessage): void {
-    this.http.post(`${this.url}/sendText`, whatsAppMessage).subscribe();
+    this.http.post(`${this._url}/sendText`, whatsAppMessage).subscribe();
   }
 
   increasePopularity(pet: Pet): void {
-    this.http.get(`${this.url}/${pet.name}/incrementPopularity`).subscribe();
+    this.http.get(`${this._url}/${pet.name}/incrementPopularity`).subscribe();
   }
 }

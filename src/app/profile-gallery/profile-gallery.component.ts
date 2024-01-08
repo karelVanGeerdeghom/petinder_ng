@@ -27,6 +27,7 @@ export class ProfileGalleryComponent implements OnInit {
   }
 
   getPets(): void {
+    console.log('ProfileGalleryComponent.getPets()');
     this.pets$ = this.petService.getPets().pipe(
       map(pets => pets.sort((a, b) => a.name.localeCompare(b.name)))
     );
