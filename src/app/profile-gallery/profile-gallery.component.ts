@@ -5,7 +5,7 @@ import { CommonModule } from "@angular/common";
 import { map, Observable } from "rxjs";
 import { FormsModule } from "@angular/forms";
 import { NameFilterPipe } from "../pipes/name-filter.pipe";
-import {PopularityPipe} from "../pipes/popularity.pipe";
+import { PopularityPipe } from "../pipes/popularity.pipe";
 
 @Component({
   selector: 'app-profile-gallery',
